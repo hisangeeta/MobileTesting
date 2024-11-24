@@ -17,12 +17,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import utils.ExtentReportsUtility;
 
 public class BasePage {
 	protected AppiumDriver driver;
 	protected WebDriverWait wait = null;
 	private Logger mylog=LogManager.getLogger(BasePage.class);
-	//protected ExtentReportsUtility extentReportUtility = ExtentReportsUtility.getInstance();
+	protected ExtentReportsUtility extentReportUtility = ExtentReportsUtility.getInstance();
 	//protected AndroidDriver<AndroidElement> driver; public BasePage(AndroidDriver<AndroidElement> driver) {  PageFactory.initElements(driver, this); }
 	
 	public BasePage(AppiumDriver driver) {
@@ -38,10 +39,10 @@ public class BasePage {
 			ele.clear();
 			ele.sendKeys(data);
 			mylog.info("data is entered in the " + objectName);
-			//extentReportUtility.logTestInfo("data is entered in the " + objectName);
+			extentReportUtility.logTestInfo("data is entered in the " + objectName);
 		} else {
 			mylog.error(objectName + " textbox is not diplayed");
-			//extentReportUtility.logTestFailed(objectName + " textbox is not diplayed");
+			extentReportUtility.logTestFailed(objectName + " textbox is not diplayed");
 		}
 	}
 
@@ -49,10 +50,10 @@ public class BasePage {
 		if (ele.isEnabled()) {
 			ele.click();
 			mylog.info(objectName + " button is clicked");
-			//extentReportUtility.logTestInfo(objectName + " button is clicked");
+			extentReportUtility.logTestInfo(objectName + " button is clicked");
 		} else {
 			mylog.error(objectName + " button is not diplayed");
-			//extentReportUtility.logTestFailed(objectName + " button is not diplayed");
+			extentReportUtility.logTestFailed(objectName + " button is not diplayed");
 		}
 	}
 
@@ -60,20 +61,20 @@ public class BasePage {
 		if (!ele.isSelected()) {
 			ele.click();
 			mylog.info(objectName + " button is selected");
-			//extentReportUtility.logTestInfo(objectName + " button is selected");
+			extentReportUtility.logTestInfo(objectName + " button is selected");
 		} else {
 			mylog.error(objectName + " button is already selected");
-			//extentReportUtility.logTestFailed(objectName + " button is already selected");
+			extentReportUtility.logTestFailed(objectName + " button is already selected");
 		}
 
 	}
 
 	public String selectByValue(WebElement ele, String value) {
 		Select select = new Select(ele);
-		// select.deselectAll();
+		 select.deselectAll();
 		select.selectByValue(value);
 		mylog.info(value+"is selected");
-		//extentReportUtility.logTestInfo(value+"is selected");
+		extentReportUtility.logTestInfo(value+"is selected");
 		return value;
 		
 	}
@@ -84,7 +85,7 @@ public class BasePage {
 		
 		select.selectByIndex(value);
 		mylog.info(value+"is selected");
-		//extentReportUtility.logTestInfo(value+"is selected");
+		extentReportUtility.logTestInfo(value+"is selected");
 		return value;
 	}
 
@@ -93,7 +94,7 @@ public class BasePage {
 		// select.deselectAll();
 		select.selectByVisibleText(value);
 		mylog.info(value+"is selected");
-		//extentReportUtility.logTestInfo(value+"is selected");
+		extentReportUtility.logTestInfo(value+"is selected");
 
 		return value;
 	}
@@ -103,7 +104,7 @@ public class BasePage {
 	public Alert switchToAlert() {
 		Alert alert = driver.switchTo().alert();
 		mylog.info("The curser is moved switched to alert");
-		//extentReportUtility.logTestInfo("The curser is moved switched to alert");
+		extentReportUtility.logTestInfo("The curser is moved switched to alert");
 		return alert;
 	}
 
@@ -111,7 +112,7 @@ public class BasePage {
 		mylog.info("Getting the text in the " + objectname + "alert");
 		String text = alert.getText();
 		mylog.info("Alert text is " + text);
-		//extentReportUtility.logTestInfo("Alert text is " + text);
+		extentReportUtility.logTestInfo("Alert text is " + text);
 	}
 
 	public void acceptAlert(Alert alert, String objectname) {
